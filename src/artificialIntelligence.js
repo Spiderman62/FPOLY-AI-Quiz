@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
-const API_KEY = 'AIzaSyDhtx9RXaF51SXYhEm72fEWLwxRm6N26a8';
+const API_KEY = 'AIzaSyCaCPMC-s8mBNVbtYtPmfxD4-hjnSXLG4Q';
 const genAI = new GoogleGenerativeAI(API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 const schema = {
@@ -35,7 +35,7 @@ const schema = {
 const modelJson = genAI.getGenerativeModel({ model: 'gemini-1.5-flash',generationConfig:{
 	responseMimeType:'application/json',
 	responseSchema:schema
-} });
+}});
 export default {
 	// async text(prompt, callback) {
 	// 	try {
