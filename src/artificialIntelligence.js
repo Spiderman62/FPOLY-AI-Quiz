@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
-const API_KEY = 'AIzaSyCaCPMC-s8mBNVbtYtPmfxD4-hjnSXLG4Q';
-const genAI = new GoogleGenerativeAI(API_KEY);
+const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
 const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 const schema = {
 	type: SchemaType.ARRAY,
