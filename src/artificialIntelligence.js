@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI, SchemaType } from '@google/generative-ai';
 const genAI = new GoogleGenerativeAI(import.meta.env.VITE_API_KEY);
-const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+const model = genAI.getGenerativeModel({model: "gemini-1.5-flash" });
 const schema = {
 	type: SchemaType.ARRAY,
 	items: {
@@ -36,31 +36,23 @@ const modelJson = genAI.getGenerativeModel({ model: 'gemini-1.5-flash',generatio
 	responseSchema:schema
 }});
 export default {
-	// async text(prompt, callback) {
-	// 	try {
-	// 		const text = await model.generateContent(prompt);
-	// 		callback(JSON.parse(text.response.text()));
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// },
-
 	historyChatMessage() {
 		const chat = model.startChat({
 			history: [
 				{
 					role: "user",
-					parts: [{ text: "" }],
+					parts: [{ text: "I am a user" }],
 				},
 				{
 					role: "model",
-					parts: [{ text: "" }],
+					parts: [{ text: "Hi user, How can i help you?" }],
 				},
 			],
 		});
 		return async (prompt, callback) => {
+
 			try {
-				let result = await chat.sendMessage(prompt);
+				let result =  await chat.sendMessage(prompt);
 				callback(result.response.text());
 			} catch (err) {
 				callback(err);
@@ -75,4 +67,4 @@ export default {
 			console.log(error);
 		}
 	}
-}	
+}

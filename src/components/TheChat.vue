@@ -64,13 +64,13 @@ const promptQuestions = reactive([
 		icon: ['fas', 'database']
 	},
 ]);
-const inputPrompt = ref(null); // references to dom inout to get value
+const inputPrompt = ref(null); // references to dom input to get value
 const inputPromptValue = ref('');
 let responseText = reactive([]);
 const titleQuestion = ref('');
 const isClickToShowChat = ref(false);
 const pendingPrompt = () => inputPromptValue.value = inputPrompt.value.value;
-const isPrompt = computed(() => inputPromptValue.value.length > 0 ? true : false);
+const isPrompt = computed(() => inputPromptValue.value.length > 0);
 const isLoading = ref(false);
 const geminiResponse = (question, qppendHistory) => {
 	store.commit('TheChat/addHistory', question);
@@ -83,24 +83,23 @@ const geminiResponse = (question, qppendHistory) => {
 		responseText = [];
 		const arraySplit = value.split(/(\*\*|##|`|\/\/|\n\n|\n)/);
 
-		responseText = []; // Khởi tạo mảng responseText
+		responseText = [];
 		for (let i = 0; i < arraySplit.length; i++) {
 			const trimmedText = arraySplit[i].trim();
-			// Kiểm tra xem nội dung có phải là tiêu đề hay không
+
 			if (trimmedText.startsWith('**') && trimmedText.endsWith('**')) {
-				// Bôi đen nội dung giữa ** và thêm xuống dòng
+
 				responseText.push(`<strong>${trimmedText.slice(2, -2).trim()}</strong><br>`);
 			} else if (trimmedText.startsWith('##')) {
-				// Bôi đen tiêu đề với ##
+
 				responseText.push(`<strong>${trimmedText.slice(2).trim()}</strong><br>`);
 			} else if (trimmedText.startsWith('//')) {
-				// Bỏ qua các dòng chú thích
-				continue;
+
 			} else if (trimmedText.startsWith('`') && trimmedText.endsWith('`')) {
-				// Bỏ qua dấu nháy
+
 				responseText.push(trimmedText.slice(1, -1).trim() + '<br>');
 			} else if (trimmedText) {
-				// Thêm nội dung còn lại với xuống dòng
+
 				responseText.push(trimmedText + '<br>');
 			}
 		}

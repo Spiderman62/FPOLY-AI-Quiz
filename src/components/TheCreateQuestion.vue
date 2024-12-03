@@ -15,7 +15,7 @@
 			<p>Success!</p>
 		</div>
 		<div class="input-box">
-			<input type="text" ref="inputPrompt" @keyup="pendingPrompt()" placeholder="Enter a promt here">
+			<input type="text" ref="inputPrompt" @keyup="pendingPrompt()" placeholder="Example: Create 5 question about biology in grade 9 of Vietnam">
 			<div class="input-icons">
 				<font-awesome-icon :icon="['fas', 'image']" />
 				<font-awesome-icon :icon="['fas', 'microphone']" />
